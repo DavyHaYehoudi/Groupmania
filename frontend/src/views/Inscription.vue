@@ -65,8 +65,8 @@ export default {
                     password    : this.inputPassword
                 })
                 .then(() => {
-                    alert("inscription réussie, redirection vers le fil d'actualité");
-                    router.push({ path : '/forum'});
+                    alert("Inscription réussie, vous êtes invité à vous connecter.");
+                    router.push({ path : '/connexion'});
                 })
                 .catch((error)=>{
                     alert(error.status)

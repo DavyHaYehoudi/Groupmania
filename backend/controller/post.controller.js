@@ -31,7 +31,7 @@ exports.createPost = async (req, res)=> {
 //Lire tous les messages publiés
 exports.readAllPost = async (req,res) => {
 
-    Post.findAll({include: ["Commentaires", "User"] })
+    Post.findAll({include: ["Commentaires", "User"], order: [["createdAt","DESC"]] })
     .then(posts=> {
         res.status(200).json(posts);
     }) .catch(error=> {

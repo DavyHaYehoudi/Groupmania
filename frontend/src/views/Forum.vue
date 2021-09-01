@@ -74,6 +74,7 @@ export default {
             creation: ""           
         }
     },
+
     created: function() {        
         axios.get("http://localhost:3000/api/post",  { headers: {"Authorization": "Bearer " + localStorage.getItem("token")} })
         .then((res) => {
@@ -96,6 +97,7 @@ export default {
             self.id                 = res.data.id;
             self.name               = res.data.pseudo
             self.isAdmin            = res.data.isAdmin;
+
         })
         .catch((error)=> { console.log(error) 
         });    

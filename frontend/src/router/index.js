@@ -21,36 +21,43 @@ const routes = [
   {
     path: '/compte',
     name: 'Compte',
+    meta: {requiresAuth: true},
     component: () => import('../views/Compte.vue')
   },
   {
     path: '/create',
     name: 'Create',
+    meta: {requiresAuth: true},
     component: () => import('../views/Create.vue')
   },
   {
     path: '/postedit',
     name: 'PostEdit',
+    meta: {requiresAuth: true},
     component: () => import('../views/PostEdit.vue')
   },
   {
     path: '/comment',
     name: 'Comment',
+    meta: {requiresAuth: true},
     component: () => import('../views/Comment.vue')
   },
   {
     path: '/createcomment',
     name: 'CreateComment',
+    meta: {requiresAuth: true},
     component: () => import('../views/CreateComment.vue')
   },
   {
     path: '/forum',
     name: 'Forum',
+    meta: {requiresAuth: true},
     component: () => import('../views/Forum.vue')
   },
   {
     path: '/admin',
     name: 'Admin',
+    meta: {requiresAuth: true},
     component: () => import('../views/Admin.vue')
   },
 ]
@@ -58,6 +65,8 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
-})
+});
 
-export default router
+
+
+export default router;
