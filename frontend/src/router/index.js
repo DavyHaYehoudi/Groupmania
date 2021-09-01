@@ -2,15 +2,21 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
 
+  
   {
-    path: '/admin',
-    name: 'Admin',
-    component: () => import('../views/Admin.vue')
+    path: '/accueil',
+    name: 'Accueil',
+    component: () => import('../views/Accueil.vue')
   },
   {
     path: '/inscription',
     name: 'Inscription',
     component: () => import('../views/Inscription.vue')
+  },
+  {
+    path: '/connexion',
+    name: 'Connexion',
+    component: () => import('../views/Connexion.vue')
   },
   {
     path: '/compte',
@@ -23,9 +29,29 @@ const routes = [
     component: () => import('../views/Create.vue')
   },
   {
-    path: '/stream',
-    name: 'Stream',
-    component: () => import('../views/Stream.vue')
+    path: '/postedit',
+    name: 'PostEdit',
+    component: () => import('../views/PostEdit.vue')
+  },
+  {
+    path: '/comment',
+    name: 'Comment',
+    component: () => import('../views/Comment.vue')
+  },
+  {
+    path: '/createcomment',
+    name: 'CreateComment',
+    component: () => import('../views/CreateComment.vue')
+  },
+  {
+    path: '/forum',
+    name: 'Forum',
+    component: () => import('../views/Forum.vue')
+  },
+  {
+    path: '/admin',
+    name: 'Admin',
+    component: () => import('../views/Admin.vue')
   },
 ]
 

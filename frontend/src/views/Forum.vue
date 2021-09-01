@@ -2,7 +2,7 @@
     <main class="container">    
         <div class="col-12">
             <div class="col-12 ">
-                <h1 v-if= 'this.messages.length !== 0' class="col-12 my-2 btn  btn-block btn-info font-weight-bold" style="background-color: #138400; cursor:default">Dernières Publications</h1>   
+                <h1 v-if= 'this.messages.length !== 0' class="col-12 my-2 btn  btn-block btn-info font-weight-bold" style="cursor:default">Dernières Publications</h1>   
                 <h1  v-else class='col-12 my-2 btn  btn-block btn-danger font-weight-bold' style="cursor:default"> Aucune publication pour l'instant, soyez le premier à en créer une ! </h1>
             </div>
             <section id="filPrincipal" class="row">
@@ -12,20 +12,17 @@
                         <div class="card-header">
                             <div class="row justify-content-around">
                                 <p class="m-1"> Bonjour {{ name }} ! </p>
-                                <button @click="localClear"></button>
+                                <button type="button" @click="localClear" class="logout">Se déconnecter</button>
                             </div>
                         </div>
                         <div class="card-body">
-                            <div class="text-center">
-                                <p id="membre">Membre depuis le {{ creation }}</p>
-                            </div>
                             <div id="compteButton" class="text-center">
                                 <router-link v-if="isAdmin" to='/Admin'><button type="button" class=" btn btn-danger mx-auto rounded p-2 buttonsPanel">ADMIN. <button class=" rounded p-1 m-1 ">ACTIVÉE</button></button></router-link> 
-                                <router-link v-else to='/Compte'><button type="button" class=" btn btn-secondary mx-auto rounded p-2 buttonsPanel">COMPTE</button></router-link> 
+                                <router-link v-else to='/Compte'><button type="button" class=" btn btn-secondary mx-auto rounded p-2 buttonsPanel">MON COMPTE</button></router-link> 
                             </div>
                         </div>
                         <div id="publicationButton" class=" card-body text-center">
-                            <router-link to='/Create' ><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">PUBLIER</button></router-link>
+                            <router-link to='/Create' ><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">PUBLIER UN MESSAGE</button></router-link>
                         </div>
                     </div>                  
                 </article>
@@ -34,7 +31,7 @@
                     <div v-for="message in messages" :key="message.id" class="card bg-light my-3">
                         <div class="card-header bg-light d-flex align-items-center justify-content-between m-0 p-1">
                             <span class=" text-dark text-bold  p-1" >
-                                <!-- Posté par {{ message.pseudo.charAt(0).toUpperCase() + message.pseudo.slice(1) }} -->
+                                Posté par {{ message.User.pseudo}}
                                 le {{ message.createdAt.slice(0,10).split('-').reverse().join('.') + ' à ' + message.createdAt.slice(11,16) }}
                             </span>
                             <h5>{{message.title}}</h5>
@@ -67,7 +64,7 @@ import axios from "axios";
 import router from "../router";
 
 export default {
-    name: "Stream",
+    name: "Forum",
     data() {
         return {
             isAdmin: false,
@@ -78,13 +75,11 @@ export default {
         }
     },
     created: function() {        
-        //let id = localStorage.getItem('userId')
         axios.get("http://localhost:3000/api/post",  { headers: {"Authorization": "Bearer " + localStorage.getItem("token")} })
         .then((res) => {
             if (res) {
                 const rep = res.data;
                 this.messages = rep; 
-                //rep.splice(10,);
                 localStorage.setItem("MessageId", rep[0].id);
                 console.log(this.messages)
             } else {
@@ -99,8 +94,7 @@ export default {
         .then(res => {  
             console.log(res)
             self.id                 = res.data.id;
-            self.name               = res.data.pseudo//.charAt(0).toUpperCase() + res.data.pseudo.slice(1);
-            self.creation           = res.data.createdAt//.slice(0,10).split("-").reverse().join(".");
+            self.name               = res.data.pseudo
             self.isAdmin            = res.data.isAdmin;
         })
         .catch((error)=> { console.log(error) 
@@ -118,9 +112,9 @@ export default {
                 typeof b,
                 typeof c
             )
-            let confirmMessageDeletion = confirm("voulez-vous vraiment supprimer cette image ?, tous les commentaires associés seront également supprimés.");
+            let confirmMessageDeletion = confirm("Voulez-vous vraiment supprimer cette image, tous les commentaires associés seront également supprimés ?");
             if (confirmMessageDeletion == true) {
-                axios.delete("http://localhost:3000/api/messages/", {
+                axios.delete("http://localhost:3000/api/comment/deleteComment/", {
                     headers: { 
                         "Authorization": "Bearer " + localStorage.getItem("token") 
                     },
@@ -140,7 +134,7 @@ export default {
         },
         localClear() {
             localStorage.clear();
-            router.push({ path : "/stream" });
+            router.push({ path : "/connexion" });
         }
     }
 }
@@ -152,4 +146,22 @@ export default {
     height: 400px;
     object-fit: cover;
 }
+
+.btn-block{
+    background-color: black;
+}
+
+.logout {
+    background-color: rgb(0, 119, 255);
+    font-weight: bold;
+    border-radius: 1rem;
+    transform: scale(1);
+    transition: 400ms;
+}
+
+.logout:hover {
+    transform: scale(1.15);
+    color: white;
+}
 </style>
+

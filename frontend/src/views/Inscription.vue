@@ -1,4 +1,5 @@
 <template>
+
     <main class="container">
          <!-- un seul bloc contenant le module d'inscription -->
         <section class="col-12 col-md-8 mt-5 mx-auto p-3 bg-light rounded">
@@ -12,23 +13,23 @@
                 </div>      
                 <div class="form-group">
                     <label for="inputEmail">Email:</label>
-                    <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="votre email">
+                    <input v-on:keydown="invalid = false" v-model="inputEmail" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Votre email">
                     <small id="emailHelp" class="form-text text-muted">Entrez une adresse mail valide</small>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword">Choisissez un Mot de passe:</label>
-                    <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="mot de passe">
+                    <input v-on:keydown="invalid = false" v-model="inputPassword" type="password" class="form-control" id="inputPassword" aria-describedby="passwordHelp" placeholder="Mot de passe">
                     <small id="passwordHelp" class="form-text text-muted">de 8 a 15 caracteres dont au moins 1 lettre et 1 chiffre</small>
                 </div>
-                <button type="submit" class="contrastBoutonVert text-white p-2 w-100 border-0 rounded shadow font-weight-bold">S'INSCRIRE</button>                          
+                <button type="submit" class="contrastBoutonVert text-white p-2 w-100 border-0 rounded shadow font-weight-bold">S'INSCRIRE</button>    
+                <div>                      
+                <router-link to="/connexion"><button type="submit" class="contrastBoutonBleu text-white p-2 w-100 border-0 rounded shadow font-weight-bold">Vous avez déjà un compte</button></router-link>          
+                </div>               
             </form>
         </section>  
         <div v-show="invalid" class="invalidBox m-2" key="invalid">
                 Veuillez remplir tous les champs du formulaire en suivant les instructions.
                 </div>  
-         <div class=' col-7 mx-auto mt-4'>
-            <router-link to="/#"><button class='contrastBoutonNoir text-white p-2 w-100 border-0 rounded shadow font-weight-bold'>RETOUR A L'ECRAN DE CONNEXION</button></router-link>
-        </div>
     </main>
 </template>
 
@@ -65,7 +66,7 @@ export default {
                 })
                 .then(() => {
                     alert("inscription réussie, redirection vers le fil d'actualité");
-                    router.push({ path : '/stream'});
+                    router.push({ path : '/forum'});
                 })
                 .catch((error)=>{
                     alert(error.status)
@@ -78,3 +79,15 @@ export default {
     }
 }    
 </script>
+
+<style scoped>
+
+.contrastBoutonVert{
+    background-color: black;
+}
+
+.contrastBoutonBleu{
+    background-color: rgb(0, 119, 255);
+    margin-top: 30px;
+}
+</style>

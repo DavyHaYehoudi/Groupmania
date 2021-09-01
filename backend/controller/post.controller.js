@@ -31,7 +31,7 @@ exports.createPost = async (req, res)=> {
 //Lire tous les messages publiés
 exports.readAllPost = async (req,res) => {
 
-    Post.findAll({include: ["Commentaires"] })
+    Post.findAll({include: ["Commentaires", "User"] })
     .then(posts=> {
         res.status(200).json(posts);
     }) .catch(error=> {
@@ -42,7 +42,7 @@ exports.readAllPost = async (req,res) => {
 
 //Ne lire qu'un message en particulier
 exports.readOnePost = async (req,res) => {
-    Post.findByPk(req.params.id, {include: ["Commentaires"] })
+    Post.findByPk(req.params.id, {include: ["Commentaires", "User"] })
     .then(post=> {
         if(!post){throw "Le post n'a pas été trouvé."}
         res.status(200).json(post);

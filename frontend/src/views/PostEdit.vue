@@ -5,7 +5,7 @@
             <form enctype="multipart/form-data">
                 <div class="header p-1">
                     <h1  class="btn btn-dark" style="cursor:default">
-                        Vous allez créer une nouvelle publication   
+                        Editer votre publication  
                     </h1>
                 </div>
                 <div class="row">
@@ -45,7 +45,7 @@ import axios from "axios"
 import router from "../router";
 
 export default {
-    name: "Create",
+    name: "PostEdit",
      data() {
         return {
             isAdmin: false,
@@ -57,6 +57,26 @@ export default {
             messages: [],
             isInvalid: false
         }
+    },
+    beforeCreate() {
+        let messageId = localStorage.getItem("MessageId");
+        console.log(messageId)
+        axios.get("http://localhost:3000/api/post/" + messageId,  { headers: {"Authorization": "Bearer " + localStorage.getItem("token")} })
+        .then((res) => {
+            if (res) {
+                const rep = res.data;
+                this.messages = rep; 
+                this.isAdmin = rep.isAdmin;
+                this.title = rep.title; 
+                this.newMessage = rep.message;
+                this.newImage = rep.picture;
+            } else {
+                console.log("aucun message")
+            }
+        })
+        .catch((error)=>{
+            console.log(error)
+        })  
     },
     methods: {
        
@@ -78,7 +98,7 @@ export default {
                 const formData = new FormData()
                 formData.append("image", this.file);
                 formData.append("post", JSON.stringify(postData));
-                axios.post("http://localhost:3000/api/post/", formData, 
+                axios.put("http://localhost:3000/api/post/update/" + localStorage.getItem("MessageId"), formData, 
                 { headers: { 
                     "Authorization":"Bearer " + localStorage.getItem("token"),
                     "Content-Type": "multipart/form-data"
@@ -90,7 +110,7 @@ export default {
                     this.newImage = null;
                     this.title = "";
                     
-                    router.push({path : '/forum'});
+                    router.push({path : 'Comment'});
                 })
                 .catch((error)=>{
                     console.log(error);
@@ -100,7 +120,7 @@ export default {
                     title: this.title,
                     message: this.newMessage
                 }
-                axios.post("http://localhost:3000/api/post/", postData,
+                axios.put("http://localhost:3000/api/post/update/"+ localStorage.getItem("MessageId"), postData,
                 {
                     headers: {
                         "Authorization": "Bearer " + localStorage.getItem("token"),
@@ -109,7 +129,7 @@ export default {
                 })
                 .then(response=> {
                     console.log(response);
-                    router.push({path : '/forum'});
+                    router.push({path : 'Comment'});
                 })
                 .catch(error=>{console.log(error)})
             }

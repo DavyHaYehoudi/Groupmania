@@ -58,7 +58,7 @@ exports.userProfil = (req, res) => {
     let id = res.locals.userId;
     console.log(id);
     User.findOne({
-        attributes: ['id', 'email', 'pseudo','isAdmin'],
+        attributes: ['id', 'email', 'pseudo','isAdmin','createdAt'],
         where: { id: id},
     })
         .then(user => res.status(200).json(user))
@@ -98,7 +98,7 @@ exports.deleteProfile = (req, res) => {
 
 
 //Déconnection d'un utilisateur
-module.exports.logout = (req, res) => {
-    localStorage.removeItem("token")
-    res.redirect('/login');
-  }
+// module.exports.logout = (req, res) => {
+//     localStorage.removeItem("token")
+//     res.redirect('/connexion');
+//   }

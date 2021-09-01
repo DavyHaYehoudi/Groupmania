@@ -2,12 +2,12 @@
 <template>
   <main>
     <div id="nav">
-      <router-link to="/admin">Administrateur</router-link> |
-      <router-link to="/signin">Connexion</router-link> |
+      <router-link to="/accueil">Accueil</router-link> |
       <router-link to="/inscription">Inscription</router-link> |
+      <router-link to="/connexion">Connexion</router-link> |
       <router-link to="/compte">Mon compte</router-link> |
-      <router-link to="/create">Create</router-link> |
-      <router-link to="/stream">Stream</router-link> |
+      <router-link to="/forum">Forum</router-link> |
+      <router-link to="/admin">Administrateur</router-link> |
     </div>
     <router-view/>
   </main>
