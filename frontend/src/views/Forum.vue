@@ -2,7 +2,7 @@
     <main class="container">    
         <div class="col-12">
             <div class="col-12 ">
-                <h1 v-if= 'this.messages.length !== 0' class="col-12 my-2 btn  btn-block btn-info font-weight-bold" style="cursor:default">Dernières Publications</h1>   
+                <h1 v-if= 'this.messages.length !== 0' class="col-12 my-2 btn  btn-block font-weight-bold">Dernières Publications</h1>   
                 <h1  v-else class='col-12 my-2 btn  btn-block btn-danger font-weight-bold' style="cursor:default"> Aucune publication pour l'instant, soyez le premier à en créer une ! </h1>
             </div>
             <section id="filPrincipal" class="row">
@@ -17,33 +17,29 @@
                         </div>
                         <div class="card-body">
                             <div id="compteButton" class="text-center">
-                                <router-link v-if="isAdmin" to='/Admin'><button type="button" class=" btn btn-danger mx-auto rounded p-2 buttonsPanel">ADMIN. <button class=" rounded p-1 m-1 ">ACTIVÉE</button></button></router-link> 
-                                <router-link v-else to='/Compte'><button type="button" class=" btn btn-secondary mx-auto rounded p-2 buttonsPanel">MON COMPTE</button></router-link> 
+                                <button v-if="isAdmin" type="button" class=" btn btn-danger mx-auto rounded p-2 buttonsPanel">ADMINISTRATEUR</button>
                             </div>
                         </div>
                         <div id="publicationButton" class=" card-body text-center">
-                            <router-link to='/Create' ><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">PUBLIER UN MESSAGE</button></router-link>
+                            <router-link to='/Create' ><button type="button" class="btn btn-dark mx-auto p-2 rounded buttonsPanel">Créer un message</button></router-link>
                         </div>
                     </div>                  
                 </article>
                  <!-- bloc avec tous le(s) message(s) -->
                 <sub class="col-12 col-md-8">
                     <div v-for="message in messages" :key="message.id" class="card bg-light my-3">
-                        <div class="card-header bg-light d-flex align-items-center justify-content-between m-0 p-1">
-                            <span class=" text-dark text-bold  p-1" >
+                        <div id="intitulePost" class="card-header bg-light d-flex align-items-center justify-content-between m-0 p-1">
+                            <h6 class=" text-dark text-bold  p-1" >
                                 Posté par {{ message.User.pseudo}}
                                 le {{ message.createdAt.slice(0,10).split('-').reverse().join('.') + ' à ' + message.createdAt.slice(11,16) }}
-                            </span>
+                            </h6>
                             <h5>{{message.title}}</h5>
-                            <div class="badge bg-dark text-wrap text-white p-2" style="width: 6rem;">
-                                ref # {{ message.id }}                    
-                            </div>                                                                                       
                         </div>
                         <div class="btn " @click="commentPage(message.id)">
-                            <img :src="message.picture" v-if="message.picture !== '' " class="border messImage" id ="picture" alt="image postée par un utilisateur" />
+                            <img :src="message.picture" v-if="message.picture !== '' " class="border messImage" id ="picture" alt="image utilisateur" />
                         </div>
-                        <div class="p-2"> 
-                            <p v-if="isAdmin || message.UserId == id" class="ml-2">   {{ message.message }} </p> 
+                        <div id="contentMessage" class="p-3"> 
+                            <p id="contentParagraphe" v-if="isAdmin || message.UserId == id" class="ml-2">   {{ message.message }} </p> 
                         </div>
                         <div class="row card-footer justify-content-around">
                             <button @click="commentPage(message.id)" class="border-0"></button>
@@ -143,14 +139,11 @@ export default {
 </script>
 
 <style  >
-#picture { 
-    width: 350px;
-    height: 400px;
-    object-fit: cover;
-}
 
-.btn-block{
-    background-color: black;
+#picture { 
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
 }
 
 .logout {
@@ -164,6 +157,30 @@ export default {
 .logout:hover {
     transform: scale(1.15);
     color: white;
+
 }
+
+.btn-block {
+    color: white;
+    background-color: black;
+}
+.btn-block:hover {
+    color: white;
+    background-color: black;
+}
+
+.btn-dark {
+    transform: scale(1);
+    transition: 400ms;
+}
+.btn-dark:hover {
+background-color: rgb(0, 119, 255);
+transform: scale(1.15);
+}
+
+#contentMessage {
+    line-height: 1rem;
+}
+    
 </style>
 

@@ -54,7 +54,6 @@ export default {
                 localStorage.setItem("token",   res.data.token)
                 localStorage.setItem("userId",  res.data.userId)
                 localStorage.setItem("userName",res.data.userName)
-                // localStorage.setItem("role",    res.data.role)
                 window.alert('Connexion établie, vous êtes dirigé vers le fil d\'actualité');
                 router.push({ path : 'forum'});
             })

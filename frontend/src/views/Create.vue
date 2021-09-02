@@ -5,7 +5,7 @@
             <form enctype="multipart/form-data">
                 <div class="header p-1">
                     <h1  class="btn btn-dark" style="cursor:default">
-                        Vous allez créer une nouvelle publication   
+                        Créez un nouveau message !   
                     </h1>
                 </div>
                 <div class="row">
@@ -14,12 +14,12 @@
                         <input type="text" v-on:keydown="isInvalid = false" class="form-control" v-model="title" id="title" name="title" rows="8" placeholder="Saisissez votre Title. (100 caractères max)"/>
                     </div>
                     <div class="col-12 justify-content-center form-group">
-                        <label for="newMessage">Donnez des détails sur votre publication.</label>
+                        <label for="newMessage">Description</label>
                         <textarea v-on:keydown="isInvalid = false" class="form-control" v-model="newMessage" id="newMessage" name="message" rows="8" placeholder="Saisissez votre message. (1500 caractères max)"></textarea>
                     </div>
                     <div class="col-12 justify-content-center text-center">
                         <img :src="newImage" class="w-50 rounded">
-                        <p class="text-center"> un aperçu de votre post apparaîtra ici. Formats acceptés: jpg, jpeg, png et gif.</p>
+                        <p class="text-center">Formats acceptés: jpg, jpeg, png et gif.</p>
                     </div>
                     <div class="col-12 justify-content-center">
                         <div class="form-group justify-content-center">
@@ -30,10 +30,10 @@
                 </div>
                 <div class="footer col-10 mx-auto align-content-center">
                     <div><button type="submit" @click.prevent="send()" class="btn btn-dark btn-block m-2 p-2">Valider</button></div>
-                    <router-link to="/forum"> <div> <a class="btn btn-danger btn-block m-2 p-2">Annuler/Retour</a></div></router-link> 
+                    <router-link to="/forum"> <div> <a class="btn btn-danger btn-block m-2 p-2">Annuler</a></div></router-link> 
                 </div>
                  <div v-show="isInvalid" class="invalidBox m-2" key="invalid">
-                    <p>Vous ne pouvez pas envoyer de post sans contenu (vous devez inclure texte et image). Votre message doit faire moins de 1500 caractères.</p>        
+                    <p>Vous ne pouvez pas envoyer de message vide. Il doit contenir aussi moins de 1500 caractères.</p>        
                 </div>  
             </form>
         </section>

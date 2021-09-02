@@ -38,7 +38,7 @@ exports.readOneComment = async (req,res) => {
 }
 
 
-//Lire tous les messages publiés
+//Lire tous les commentaires publiés
 exports.getAllCommentsForPostId = async (req,res) => {
     let id = req.params.id;
     Comment.findAll({where: {PostId: {[Op.like]: `%${id}%`} } ,include: ["User"] })
@@ -49,7 +49,7 @@ exports.getAllCommentsForPostId = async (req,res) => {
         res.status(404).json({error: error || "Le post n'a pas été trouvé."})
     })
 }
-//Lire tous les messages publiés
+//Lire tous les commentaires publiés
 exports.readAllComments = async (req,res) => {
 
     Comment.findAll({include: ["User"] })

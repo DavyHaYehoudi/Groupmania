@@ -4,7 +4,7 @@
     <main class="container">  
          <!-- titre -->
         <div class="row mb-4 rounded">
-            <p class="col-12 my-2 btn  btn-block btn-info badgeTopColor font-weight-bold" >Vous consultez les commentaires</p>  
+            <p class="col-12 my-2 btn  btn-block  badgeTopColor font-weight-bold" >Vous consultez les commentaires</p>  
            
         </div>
         <div class="row">
@@ -19,33 +19,29 @@
                     </div>
                     <div class="card-body">
                         <div id="compteButton" class="text-center">
-                            <router-link v-if="isAdmin" to='/Admin'><button type="button" class=" btn btn-danger mx-auto rounded p-2 buttonsPanel">ADMIN. <button class=" rounded p-1 m-1 ">ACTIVÉE</button></button></router-link> 
-                            <router-link v-else to='/Compte'><button type="button" class=" btn btn-secondary mx-auto rounded p-2 buttonsPanel">COMPTE</button></router-link> 
+                            <button v-if="isAdmin" type="button" class=" btn btn-danger mx-auto rounded p-2 buttonsPanel">ADMINISTRATEUR</button> 
                         </div>
                     </div>
                     <div class="justify-content-center align-self-center">
-                        <router-link to='/Create' ><button type="button" class="btn btn-dark  rounded m-2 p-2 font-weight-bold ">CREER UNE PUBLICATION</button></router-link>
+                        <router-link to='/Create' ><button type="button" class="btn btn-dark  rounded m-2 p-2 font-weight-bold ">Créer un message</button></router-link>
                     </div>
                     <div class="justify-content-center align-self-center">
-                        <router-link to='/CreateComment'><button type="button" class="btn btn-dark  m-2 p-2 rounded font-weight-bold" >COMMENTER</button></router-link>
+                        <router-link to='/CreateComment'><button type="button" class="btn btn-dark  m-2 p-2 rounded font-weight-bold" >Commenter</button></router-link>
                     </div>
                 </div>
             </article>
             <!--Section message -->
             <section class="card col-12 col-md-8 bg-light mb-3">
-                <div class="card-header bg-light d-flex align-items-center justify-content-between m-0 p-1">
-                    <span class=" text-dark text-bold  p-1" > 
+                <div id="intituleComment" class="card-header bg-light d-flex align-items-center justify-content-between m-0 p-1">
+                    <h6 class=" text-dark text-bold  p-1" > 
                         Posté par {{ messageUserName }}
                         le {{ creation }}
-                    </span>
+                    </h6>
                     <h5>{{title}}</h5>
-                    <div class="badge bg-dark text-wrap text-white p-2" style="width: 6rem;">
-                        ref # {{ messageId}} id: {{currentUserId}} - {{messageUserId}}
-                    </div>                                                                                       
                 </div>
                 <div>
                     <p class="text-center"> 
-                        <router-link to='/Comment'><img :src="messageUrl" v-if="messageUrl !== '' " class="border messImage" id="picture" alt="image postee par utilisateur"
+                        <router-link to='/Comment'><img :src="messageUrl" v-if="messageUrl !== '' " class="border messImage" id="picture" alt="image utilisateur"
                     ></router-link>
                     </p>                          
                 </div> 
@@ -54,7 +50,7 @@
                         <div>   {{ message }} </div> 
                     </div> 
                     <div v-if="isAdmin || messageUserId == currentUserId">
-                        <button @click="deleteMessage(messageId, messageUserId, currentUserId)" class="border-0">Delete</button>
+                        <button @click="deleteMessage(messageId, messageUserId, currentUserId)" class="border-0">Supprimer<img class="poubelle" src="../assets/poubelle.svg"/></button>
                     </div>
                     <div v-if="isAdmin || messageUserId == currentUserId">
                         <button @click="modifMessage(messageId, messageUserId, currentUserId)" class="border-0">Modifier</button>
@@ -64,7 +60,6 @@
         </div>
          <!-- section commentaire(s) -->
         <section class="row">
-            <router-link to='/createcomment'><p  v-if="comments.length == 0" class='mt-3 btn btn-sm btn-block btn-danger font-weight-bold'> Aucun commentaire pour l'instant, soyez le premier à en créer un !</p></router-link>
             <div v-for="comment in comments" :key="comment" class="card col-12 mt-3">
                 <div class="card-header ">
                     <p class="btn btn-dark w-100" style="cursor:default">Commentaire rédigé le {{ comment.createdAt.slice(0,10).split('-').reverse().join('/') }}  par {{ comment.User.pseudo}}</p>
@@ -73,9 +68,8 @@
                     <p>  {{ comment.commentaire}} </p>
                 </div>
                 <div class="card-footer row justify-content-between">
-                    <p class="btn btn-dark w-10 text-right mx-2 " style="cursor:default">ref# <span class="badge badge-light"> {{ comment.id }}</span></p>
                     <div v-if="isAdmin || comment.UserId == currentUserId">
-                        <button @click="deleteComment(comment.id, comment.UserId, currentUserId)" class="border-0">Delete</button>
+                        <button @click="deleteComment(comment.id, comment.UserId, currentUserId)" class="border-0">Supprimer<img class="poubelle" src="../assets/poubelle.svg"/></button>
                     </div>
                 </div>
             </div>
@@ -201,8 +195,7 @@ export default {
 
 <style  >
 #picture { 
-    width: 350px;
-    height: 400px;
+    width:100%;
     object-fit: cover;
 }
 </style>
@@ -220,4 +213,30 @@ export default {
     transform: scale(1.15);
     color: white;
 }
+
+.btn-block {
+    color: white;
+    background-color: black;
+}
+
+.poubelle {
+width: 1rem;
+margin-left: 10px;
+}
+
+.border-0 {
+    font-weight: bolder;
+    border-radius: 1rem;
+    padding: 5px 10px;
+    background-color: rgb(197, 191, 191);
+    transform: scale(1);
+    transition: 400ms;
+}
+
+.border-0:hover {
+    background-color: rgb(0, 119, 255);
+    color: white;
+    transform: scale(1.15);
+}
+
 </style>

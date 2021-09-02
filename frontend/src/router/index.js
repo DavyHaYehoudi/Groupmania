@@ -2,12 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
 
-  
-  {
-    path: '/accueil',
-    name: 'Accueil',
-    component: () => import('../views/Accueil.vue')
-  },
   {
     path: '/inscription',
     name: 'Inscription',
@@ -53,12 +47,6 @@ const routes = [
     name: 'Forum',
     meta: {requiresAuth: true},
     component: () => import('../views/Forum.vue')
-  },
-  {
-    path: '/admin',
-    name: 'Admin',
-    meta: {requiresAuth: true},
-    component: () => import('../views/Admin.vue')
   },
 ]
 

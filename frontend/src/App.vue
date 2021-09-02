@@ -2,12 +2,12 @@
 <template>
   <main>
     <div id="nav">
-      <router-link v-if="UserId || isAdmin"  to="/accueil">Accueil</router-link> |
-      <router-link v-if="!UserId" to="/inscription">Inscription</router-link> |
-      <router-link v-if="!UserId"  to="/connexion">Connexion</router-link> 
-      <router-link v-if="UserId || isAdmin" to="/compte">Mon compte</router-link> |
-      <router-link v-if="UserId || isAdmin"  to="/forum">Forum</router-link> 
-      <router-link v-if="isAdmin"  to="/admin">Administrateur</router-link> 
+      <router-link v-if="!UserId" to="/inscription" class="onglet">Inscription</router-link> 
+      <router-link v-if="!UserId"  to="/connexion" class="onglet">Connexion</router-link> 
+      <router-link v-if="UserId || isAdmin" to="/compte" class="onglet">Mon compte</router-link> 
+      <router-link v-if="UserId || isAdmin"  to="/forum" class="onglet">Forum</router-link> 
+
+      <p><img class="logoG" src="./assets/icon-left-font-monochrome-black.svg"/></p>
     </div>
     <router-view/>
   </main>
@@ -47,7 +47,7 @@ export default {
 }
 
 </script>
-<style lang="scss">
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -56,16 +56,32 @@ export default {
   color: #2c3e50;
 }
 
+.onglet {
+  border:4px solid black;
+  box-shadow: 5px 5px 5px black;
+  border-radius: 1rem;
+  padding: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  max-height: 60px;
+}
+
 #nav {
-  padding: 30px;
+margin-top: 50px;
+margin-bottom: 50px;
+display: flex;
+justify-content: space-around;
+flex-wrap: wrap;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.logoG {
+  width: 100%;
+}
+
+@media screen and (max-width:736px){
+  .logoG {
+  margin-top:50px;
+}
 }
 </style>
