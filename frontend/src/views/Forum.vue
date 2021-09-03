@@ -102,7 +102,7 @@ export default {
         commentPage(m) {
             console.log(m);
             localStorage.setItem('MessageId', m);
-            router.push({ path : "/Comment" });
+            router.push({ path : "/comment" });
         },
         deleteMessage(a, b, c) {
             console.log(

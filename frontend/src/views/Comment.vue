@@ -156,7 +156,7 @@ export default {
                     })
                 .then((res)=> console.log(res))
                 .catch((error) => { 
-                    console.log("ligne 133 " + error)})
+                    console.log("ligne 159 " + error)})
                     alert("La suppression du message entraîne celle de ses commentaires.")
                     router.push({ path : "/forum" });
             } else {

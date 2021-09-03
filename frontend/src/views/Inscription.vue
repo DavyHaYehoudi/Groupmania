@@ -72,7 +72,7 @@ export default {
                     alert(error.status)
                     console.log(error)});
             } else {
-                console.log('validation form, method sendForm, renvoie une erreur')
+                console.log('validation refusée')
                 this.invalid = true;
             }
         }

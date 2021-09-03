@@ -18,7 +18,7 @@
                     <router-link to="/forum"> <div> <a class="btn btn-danger btn-block m-2 p-2">Annuler/Retour</a></div></router-link> 
                 </div>
                 <div v-show="isInvalid" class="invalidBox m-2" key="invalid">
-                    <p> Vous devez renseigner la case " Saisissez votre commentaire ici en respectant les instructions (1500 caractères max) "</p>
+                    <p> Vous devez renseigner la case " Saisissez votre commentaire ici en respectant les instructions (1500 caractères maximum) "</p>
                 </div>  
             </form>
         </section>
@@ -47,7 +47,7 @@ export default {
         },
         send() {
 
-            if (!this.newComment || !localStorage.getItem("userId") || !localStorage.getItem("MessageId" || this.newComment.lemgth > 1500)) {
+            if (!this.newComment || !localStorage.getItem("userId") || !localStorage.getItem("MessageId" || this.newComment.length > 1500)) {
                 this.isInvalid = true;
             } else {
 
