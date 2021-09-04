@@ -24,20 +24,20 @@ Le ou la chargé-e de communication Groupomania doit pouvoir modérer les intera
 
 OUTILS
 
-Editeur de texte : Visual Studio Code
-Languages : HTML CSS JS 
-Frameworks  : Bootstrap Node.js(Express) Vue.js
-Base de données : MySQL sur Xampp
+-Editeur de texte : Visual Studio Code
+-Languages : HTML CSS JS 
+-Frameworks  : Bootstrap Node.js(Express) Vue.js
+-Base de données : MySQL sur Xampp
 
 BACKEND
 
-Nodemon server 
-Port 3000
+-Nodemon server 
+-Port 3000
 
 FRONTEND 
 
-Npm run serve
-Port 4000 
+-Npm run serve
+-Port 4000 
 (Le port 8080 par défaut entrait en collision avec le port MySql lui aussi sur 8080)
 
 ADMINISTRATEUR
