@@ -97,8 +97,23 @@ exports.deleteOnePost = async (req,res) => {
   //Modification d'un post
 exports.update = (req, res) => {
     let userId= res.locals.userId;
+
+    //Supression de l'image à remplacer
+    Post.findByPk(req.params.id)
+    .then(post=>{
+        let filename = post.picture.split("/images/")[1];
+            fs.unlink(`images/${filename}`, err=> {
+                try {
+                    if(err) {throw err}
+                } catch (error) {
+                    res.json({error: error})
+                }});
+    })
+    
+    // Remplacement par la nouvelle image s'il y en a une ou simplement remplacement par le nouveau texte
     let postDta = req.file ? {
-        ...req.body.post,
+        // ...req.body.post,
+        ...JSON.parse(req.body.post),
         UserId: userId,
         picture: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
 
