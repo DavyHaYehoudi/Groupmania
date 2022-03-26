@@ -1,3 +1,5 @@
+<img width="1326" alt="Groupmania" src="https://user-images.githubusercontent.com/79283100/160249013-6906c472-0a02-49f4-b473-2da74f416236.png">
+
 # Groupomania
 
 BUT DU PROJET
